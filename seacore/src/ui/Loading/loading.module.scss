@@ -1,0 +1,69 @@
+.wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  padding: 10vw;
+  box-sizing: border-box;
+  touch-action: none;
+  display: grid;
+  gap: 3rem;
+  place-content: center;
+  justify-items: center;
+  background: radial-gradient(#00c1ed, #00edb6);
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+
+  .loading {
+    // No fixed width here anymore - it used to hold a percentage-sized
+    // progress bar (width: 100% of this box), but the logo now has its
+    // own explicit width (200px, max-width: 55vw - see .logo below). A
+    // parent narrower than that (30vw is well under 200px on any phone)
+    // made the logo overflow its own grid track, which on mobile showed
+    // up as the logo appearing to sit off-center/shifted rather than
+    // cleanly centered. Sizing to content instead removes that mismatch.
+    display: grid;
+    place-items: center;
+    grid-template-areas: "loader";
+  }
+
+  // Intro wordmark, ported from bathcore's #intro-logo: starts invisible
+  // and fades in once mounted (see index.jsx's logoVisible state), instead
+  // of the previous progress-bar/gauge element.
+  .logo {
+    grid-area: loader;
+    display: block;
+    width: 200px;
+    max-width: 55vw;
+    height: auto;
+    opacity: 0;
+    transition: opacity 1.1s ease;
+  }
+
+  .logoShow {
+    opacity: 1;
+  }
+
+  &.hide {
+    // Fades all the way to fully invisible (and stops intercepting
+    // pointer events) instead of settling at half-opacity - it used to
+    // sit at 0.5 for its full 5s lingering period, which was one more
+    // thing that could visually tint or block whatever's revealing
+    // underneath during that window.
+    pointer-events: none;
+    animation: 0.3s ease-in-out forwards 1 normal hideLoading;
+
+    .logo {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hideLoading {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

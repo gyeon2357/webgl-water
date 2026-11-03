@@ -1,0 +1,62 @@
+// Hero scroll behaviour, ported from bathcore:
+// - heroWrapper is taller than the viewport (100% visible + 40% extra
+//   scroll "budget"). heroPin is sticky inside it, so the 3D scene stays
+//   pinned on screen for that extra scrolling/swiping before the section
+//   below is allowed to scroll into view.
+// - The 100vh/140vh fallback is for browsers that don't understand svh
+//   yet; the svh rule right after each wins wherever it's supported.
+.heroWrapper {
+  position: relative;
+  height: 140vh;
+  height: 140svh;
+  // Pulls the next section up by a hair so no sub-pixel rounding gap
+  // between this section's bottom edge and brand-intro's top edge can
+  // ever show the page's white background through as a seam. Backed by
+  // a matching background-color too, so even if a seam does show, it
+  // blends with the scene's sky color instead of flashing white.
+  margin-bottom: -1px;
+  background: #fcffdc;
+}
+
+.heroPin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.canvasFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// Placeholder next section - real brand/reservation content comes later.
+.brandIntro {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+  background: #f5f2ec;
+  color: #1a1a1a;
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
+
+  h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+    max-width: 32rem;
+  }
+}

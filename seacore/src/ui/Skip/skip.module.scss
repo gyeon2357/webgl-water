@@ -1,0 +1,47 @@
+.skip {
+  all: unset;
+  position: absolute;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6em 1.1em;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  color: #000;
+  font-family: var(--font-family);
+  font-size: 0.75rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-sizing: border-box;
+
+  // Hidden until the intro is done, then fades/slides in like the rest
+  // of the UI - see .visible below.
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 0.5rem);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease,
+    background-color var(--transition-time) var(--transition-ease),
+    color var(--transition-time) var(--transition-ease);
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+  }
+
+  svg {
+    width: 0.85em;
+    height: 0.85em;
+  }
+}

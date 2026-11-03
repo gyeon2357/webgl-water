@@ -1,0 +1,21 @@
+{
+  "name": "bathcore",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A Poolcore / Cleancore aesthetic Three.js water demo",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/three": "^0.182.0",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.2.7"
+  },
+  "packageManager": "pnpm@10.25.0"
+}

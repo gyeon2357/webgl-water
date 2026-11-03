@@ -1,0 +1,81 @@
+#root {
+  width: 100%;
+}
+
+body,
+canvas {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* Locked by default so the page can't be scrolled (wheel, touch, keyboard,
+   scrollbar) while the intro splash is up - lifted once the intro
+   actually finishes (App.jsx toggles "intro-done" once `ready` flips
+   true). Same pattern the bathcore intro uses. */
+html,
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html.intro-done,
+body.intro-done {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: auto;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  /* Relative paths into src/assets (moved out of public/) instead of
+     root-absolute "/fonts/..." - this project deploys under a subpath
+     (see vite.config.js's base: "/webgl-water/seacore/"), and Vite only
+     auto-prefixes base onto asset references it processes itself (HTML
+     tag attributes, JS imports, and relative url()s inside CSS) - a
+     literal "/fonts/..." in CSS is left exactly as written and always
+     resolves against the site's actual root, not this subpath, so the
+     font 404'd and silently fell back to the default font. A relative
+     path here is resolved and base-prefixed correctly by Vite's own CSS
+     asset pipeline.
+   */
+  src:
+    url("../assets/fonts/jetbrainsmono-regular.woff2") format("woff2"),
+    url("../assets/fonts/jetbrainsmono-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+:root {
+  --base-font: 14px;
+  --bg-color: #fff;
+  --button-color: #93cb43;
+  --font-color: #486051;
+  --font-color-light: #48605160;
+  --font-background: #fefffade;
+  --font-backgound-solid: #fefffa;
+
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-time: 0.15s;
+
+  --font-family: "JetBrains Mono", "Courier New", Courier, "Lucida Console",
+    monospace;
+}
+
+html {
+  font-size: 16px;
+}
+body {
+  font-family: var(--font-family);
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  color: var(--font-color);
+  background-color: var(--bg-color);
+
+  cursor: var(--cursor), auto;
+}
